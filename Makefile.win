@@ -1,0 +1,37 @@
+# raylib compiled with
+# make OS=Windows_NT CC=x86_64-w64-mingw32-gcc
+
+APPNAME = gui_demo
+PROJECT_PATH = $(shell pwd)
+OBJECT_PATH = $(PROJECT_PATH)/obj
+RAYLIB_PATH = /home/psichma/tools/raylib/src
+#https://stackoverflow.com/questions/45535838/in-the-mingw-compiler-what-is-the-mwindows-command-and-what-does-it-do
+LDFLAGS:=-L../../tools/raylib/src -lm -lraylib -pthread -lopengl32 -lgdi32 -lwinmm #-mwindows
+
+CFLAGS:= -g -Wfatal-errors -pedantic -Wall -Wextra #-Werror
+CFLAGS+= -isystem $(RAYLIB_PATH)
+CFLAGS+= -static-libgcc -static-libstdc++
+CFLAGS+= -std=c++17
+
+CC=x86_64-w64-mingw32-g++
+export
+
+.PHONY: debug release clean src
+debug: CFLAGS+= -g
+release: CFLAGS+= -O3
+
+$(APPNAME).exe: src
+	$(info DOING APP)
+	$(CC) $(CFLAGS) $(addprefix obj/, $(shell ls obj)) -o $(APPNAME).exe $(LDFLAGS)
+
+src:
+	mkdir -p obj
+	$(info DOING SRC)
+	$(MAKE) -C src all
+
+
+debug release: clean $(APPNAME)
+
+clean:
+	rm -f obj/*
+	rm -f $(APPNAME).exe
