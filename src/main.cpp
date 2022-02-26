@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include "graphics/Rectangle.h"
+#include "commands/CommandWindow.h"
 #include <string>
 
 
@@ -15,16 +16,26 @@ int main(int argc, char* argv[]) {
 	InitWindow(window_width, window_height, "GUI DEMO");
 	SetTargetFPS(60);
 	SetTraceLogLevel(LOG_DEBUG);
+	SetExitKey(KEY_NULL); // so commandwindow is closable via ESC
+
+
+	psgui::commands::CommandWindow cw(window_width);
 
 
 	psgui::graphics::Rectangle rect(20.f, 20.f, 80.f, 80.f);
 	rect.setFillColor(RED);
 
 	while(!WindowShouldClose()) {
+		if(IsKeyReleased(KEY_F1)) {
+			cw.toggle();
+		}
+
 		// update code
 		char fps_text[5];
 		sprintf(fps_text, "%d", GetFPS());
 		int fps_offset = MeasureText(fps_text, font_size);
+
+		cw.update();
 
 
 		// draw code
@@ -32,6 +43,7 @@ int main(int argc, char* argv[]) {
 		ClearBackground(BLACK);
 		DrawText(fps_text, window_width - fps_offset, 0, font_size, RED);
 		rect.render();
+		cw.render();
 		EndDrawing();
 	}
 }

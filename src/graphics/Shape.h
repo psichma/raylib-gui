@@ -26,30 +26,30 @@ namespace psgui::graphics {
 
 			virtual void setPosition(float x, float y);
 			virtual void setPosition(Vector2 position);
-			virtual Vector2 getPosition() {return this->position;}
+			virtual Vector2 getPosition() const {return this->position;}
 
 			virtual void setSize(Vector2 size);
 			virtual void setSize(float x, float y);
-			virtual Vector2 getSize() {return this->size;}
+			virtual Vector2 getSize() const {return this->size;}
 
 			virtual void setWidth(float w);
-			virtual float getWidth() {return this->size.x;}
+			virtual float getWidth() const {return this->size.x;}
 			virtual void setHeight(float h);
-			virtual float getHeight() {return this->size.y;}
+			virtual float getHeight() const {return this->size.y;}
 
 			virtual void setFillColor(Color color);
-			Color getFillColor() {return this->fill_color;}
+			Color getFillColor() const {return this->fill_color;}
 
 			virtual void setOutlineColor(Color color);
-			Color getOutlineColor() {return this->outline_color;}
+			Color getOutlineColor() const {return this->outline_color;}
 
 			void setOutlineThickness(float thickness);
-			float getOutlineThickness() {return this->outline_thickness;}
+			float getOutlineThickness() const {return this->outline_thickness;}
 			void setOutline(bool state);
 			void toggleOutline();
 
 			void setRotation(float rotation);
-			float getRotation() {return this->rotation;}
+			float getRotation() const {return this->rotation;}
 
 			virtual void update(float delta) = 0;
 			virtual void render() const = 0;

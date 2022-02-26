@@ -17,16 +17,16 @@ namespace psgui::graphics {
 
 			virtual void setPosition(float x, float y);
 			virtual void setPosition(Vector2 position);
-			virtual Vector2 getPosition() {return {this->rect.x, this->rect.y};}
+			virtual Vector2 getPosition() const {return {this->rect.x, this->rect.y};}
 
 			virtual void setSize(Vector2 size);
 			virtual void setSize(float x, float y);
-			virtual Vector2 getSize() {return {this->rect.width, this->rect.height};}
+			virtual Vector2 getSize() const {return {this->rect.width, this->rect.height};}
 
 			virtual void setWidth(float w);
-			virtual float getWidth() {return this->rect.width;}
+			virtual float getWidth() const {return this->rect.width;}
 			virtual void setHeight(float h);
-			virtual float getHeight() {return this->rect.height;}
+			virtual float getHeight() const {return this->rect.height;}
 
 			virtual void update(float delta) {}
 			virtual void render() const;
