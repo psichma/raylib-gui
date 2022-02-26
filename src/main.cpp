@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "graphics/Rectangle.h"
 #include <string>
 
 
@@ -16,6 +17,8 @@ int main(int argc, char* argv[]) {
 	SetTraceLogLevel(LOG_DEBUG);
 
 
+	psgui::graphics::Rectangle rect(20.f, 20.f, 80.f, 80.f);
+	rect.setFillColor(RED);
 
 	while(!WindowShouldClose()) {
 		// update code
@@ -28,6 +31,7 @@ int main(int argc, char* argv[]) {
 		BeginDrawing();
 		ClearBackground(BLACK);
 		DrawText(fps_text, window_width - fps_offset, 0, font_size, RED);
+		rect.render();
 		EndDrawing();
 	}
 }
